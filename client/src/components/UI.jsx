@@ -1,0 +1,10 @@
+import { motion } from 'framer-motion'
+import { FiArrowUpRight, FiGithub, FiExternalLink, FiDownload, FiSend } from 'react-icons/fi'
+export const Reveal = ({ children, className = '' }) => <motion.div className={className} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .15 }} transition={{ duration: .65, ease: [0.16, 1, .3, 1] }}>{children}</motion.div>
+export function SectionTitle({ eyebrow, title, copy }) { return <Reveal className="section-title"><small>{eyebrow}</small><h2>{title}</h2>{copy && <p>{copy}</p>}</Reveal> }
+export function Button({ children, secondary = false, href = '#contact' }) { return <a className={`button ${secondary ? 'secondary' : ''}`} href={href}>{children}<FiArrowUpRight /></a> }
+export function ProjectCard({ project, index = 0 }) { return <Reveal className={`project-card project-${index % 3}`}><div className="project-visual"><span>{project.number}</span><div className="screen"><b>{project.mark}</b><em /></div></div><div className="project-content"><p>{project.type} · {project.year}</p><h3>{project.title}</h3><span>{project.description}</span><div className="card-bottom"><div>{project.stack.map(x => <i key={x}>{x}</i>)}</div><a href="#projects" aria-label={`View ${project.title}`}><FiArrowUpRight /></a></div></div></Reveal> }
+export function StatCard({ value, label, icon }) { return <div className="stat-card"><span>{icon}</span><strong>{value}</strong><p>{label}</p></div> }
+export function ContactForm() { return <form className="contact-form" onSubmit={e => e.preventDefault()}><label>Your name<input placeholder="Jane Smith" /></label><label>Work email<input type="email" placeholder="jane@company.com" /></label><label>Tell me about your project<textarea placeholder="A few words about what you’re making..." /></label><button className="button" type="submit">Send inquiry <FiSend /></button></form> }
+export function ResumeButton() { return <a className="button secondary" href="/resume.pdf" download>Download résumé <FiDownload /></a> }
+export const Icons = { FiGithub, FiExternalLink }
